@@ -133,6 +133,8 @@ recipeGuacamole.getCategories().add(americanCategory);
 
 
 recipeGuacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
+recipeGuacamole.setServings(6);
+recipeGuacamole.setSource("Simply Recipes");
 recipes.add(recipeGuacamole);
 //Taco
         Recipe recipeTaco=new Recipe();
@@ -142,6 +144,8 @@ recipes.add(recipeGuacamole);
 recipeTaco.getCategories().add(mexicanCategory);
         recipeTaco.getCategories().add(americanCategory);
 recipeTaco.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
+recipeTaco.setServings(4);
+recipeTaco.setSource("Simply Recipes");
 Notes tacoNotes=new Notes();
 tacoNotes.setRecipeNotes("We have a family motto and it is this: Everything goes better in a tortilla."+"\n" + "Any and every kind of leftover can go inside a warm tortilla, usually with a healthy dose of pickled jalapenos. I can always sniff out a late-night snacker when the aroma of tortillas heating in a hot pan on the stove comes wafting through the house.\n" +
         "\n" + "Today’s tacos are more purposeful – a deliberate meal instead of a secretive midnight snack!" + "\n" + "First, I marinate the chicken briefly in a spicy paste of ancho chile powder, oregano, cumin, and sweet orange juice while the grill is heating. You can also use this time to prepare the taco toppings.\n" +
