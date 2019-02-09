@@ -29,10 +29,10 @@ public class IndexControllerTest {
     IndexController indexController;
 
     @Mock
-    RecipeServiceImpl recipeService;
+   public RecipeServiceImpl recipeService;
 
     @Mock
-    Model model;
+   public Model model;
 
     @Before
     public void setUp() throws Exception{
