@@ -80,7 +80,10 @@
 					<includes>
 						<include>**/*IT.java</include>
 					</includes>
-
+					<additionalClasspathElements>
+						<additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
+					</additionalClasspathElements>
+					<parallel>none</parallel>
 				</configuration>
 				<executions>
 					<execution>
