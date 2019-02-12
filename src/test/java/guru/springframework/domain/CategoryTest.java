@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class CategoryTest {
 
-Category category;
+    public Category category;
 
 @Before
 public void setUp(){

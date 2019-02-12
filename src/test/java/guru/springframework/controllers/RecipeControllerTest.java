@@ -20,9 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RecipeControllerTest {
 
     @Mock
-    RecipeService recipeService;
+  public  RecipeService recipeService;
 
-    RecipeController controller;
+  public  RecipeController controller;
 
     @Before
     public void setUp() throws Exception {

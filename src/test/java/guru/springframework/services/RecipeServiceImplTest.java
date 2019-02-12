@@ -19,16 +19,16 @@ import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
 
-    RecipeServiceImpl recipeService;
+  public  RecipeServiceImpl recipeService;
 
     @Mock
-    RecipeRepository recipeRepository;
+    public  RecipeRepository recipeRepository;
 
     @Mock
-    RecipeToRecipeCommand recipeToRecipeCommand;
+    public  RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
-    RecipeCommandToRecipe recipeCommandToRecipe;
+    public  RecipeCommandToRecipe recipeCommandToRecipe;
     @Before
     public void setUp() throws Exception{
         MockitoAnnotations.initMocks(this);
