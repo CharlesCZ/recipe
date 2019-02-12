@@ -97,9 +97,8 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<!--Note your version numbe might be different-->
-				<version>2.22.0</version>
+				<version>3.0.0-M1</version>
 				<configuration>
-					<argLine>--add-modules java.base</argLine>
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
