@@ -96,6 +96,21 @@ verify(recipeRepository,times(1));
         recipe.setId(1L);
 
         assertEquals(command.getId(),recipeToRecipeCommand.convert(recipe).getId());
+    }
+
+    @Test
+    public void testDeleteById() {
+        //given
+        Long idToDelete=2L;
+
+        //when
+        recipeService.deleteById(idToDelete);
+
+        //no 'when' since return has void return statement
+//then
+        verify(recipeRepository,times(1)).deleteById(anyLong());
+
+
 
     }
 }
