@@ -1,5 +1,6 @@
 package guru.springframework.services;
 
+import guru.springframework.commands.RecipeCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -80,5 +82,20 @@ verify(recipeRepository,times(1));
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
         verify(recipeRepository, never()).findById(anyLong());
+    }
+
+    @Transactional
+    @Test
+    public void findCommandById() {
+        RecipeCommand command=new RecipeCommand();
+        command.setId(1L);
+
+        when(recipeToRecipeCommand.convert(any())).thenReturn(command);
+
+        Recipe recipe=new Recipe();
+        recipe.setId(1L);
+
+        assertEquals(command.getId(),recipeToRecipeCommand.convert(recipe).getId());
+
     }
 }
