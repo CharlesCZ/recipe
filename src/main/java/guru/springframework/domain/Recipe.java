@@ -33,7 +33,7 @@ public class Recipe {
     @OneToOne(fetch = FetchType.EAGER)
     private UnitOfMeasure uom;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe",orphanRemoval = true)
     private Set<Ingredient> ingredients=new HashSet<>();
 
     @Lob

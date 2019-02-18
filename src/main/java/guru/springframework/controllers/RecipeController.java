@@ -47,7 +47,7 @@ private final RecipeService recipeService;
     return "redirect:/recipe/"+recipeCommand.getId()+ "/show";
     }
 
-@GetMapping("recipe/{id}/delete")
+@GetMapping("/recipe/{id}/delete")
 public String deleteById(@PathVariable Long id){
         log.debug("Deleting id:  "+ id);
         recipeService.deleteById(id);
