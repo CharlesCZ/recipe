@@ -7,13 +7,13 @@ import java.util.Set;
 
 public interface RecipeService {
 
-    public Set<Recipe> getRecipes();
+    Set<Recipe> getRecipes();
 
-    public Recipe findById(Long l);
+    Recipe findById(String id);
+
+    RecipeCommand findCommandById(String id);
 
     RecipeCommand saveRecipeCommand(RecipeCommand command);
 
-    public RecipeCommand findCommandById(Long l);
-
-    void deleteById(Long l);
+    void deleteById(String idToDelete);
 }

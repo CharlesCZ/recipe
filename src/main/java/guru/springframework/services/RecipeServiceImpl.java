@@ -18,6 +18,7 @@ import java.util.Set;
 @Slf4j
 @Service
 public class RecipeServiceImpl implements RecipeService {
+
     private final RecipeRepository recipeRepository;
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
@@ -28,36 +29,31 @@ public class RecipeServiceImpl implements RecipeService {
         this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
 
-  public  Set<Recipe> getRecipes(){
-      log.debug("I'm in the service");
-        Set<Recipe> recipeSet=new HashSet<>();
+    @Override
+    public Set<Recipe> getRecipes() {
+        log.debug("I'm in the service");
+
+        Set<Recipe> recipeSet = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
-        return  recipeSet;
-}
+        return recipeSet;
+    }
 
     @Override
-    public Recipe findById(Long l) {
+    public Recipe findById(String id) {
 
-        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-
-            throw new NotFoundException("Recipe Not Found for ID value: "+ l.toString());
+            throw new NotFoundException("Recipe Not Found. For ID value: " + id );
         }
 
         return recipeOptional.get();
     }
 
-
     @Override
     @Transactional
-    public RecipeCommand findCommandById(Long l){
-        return  recipeToRecipeCommand.convert(findById(l));
-    }
-
-    @Override
-    public void deleteById(Long l) {
-        recipeRepository.deleteById(l);
+    public RecipeCommand findCommandById(String id) {
+        return recipeToRecipeCommand.convert(findById(id));
     }
 
     @Override
@@ -70,6 +66,8 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeToRecipeCommand.convert(savedRecipe);
     }
 
-
-
+    @Override
+    public void deleteById(String idToDelete) {
+        recipeRepository.deleteById(idToDelete);
+    }
 }

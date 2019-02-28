@@ -18,76 +18,74 @@ import javax.validation.Valid;
 @Controller
 public class RecipeController {
 
-private final RecipeService recipeService;
-
-private static final String RECIPE_RECIPEFORM_URL="recipe/recipeform";
-
-
+    private static final String RECIPE_RECIPEFORM_URL = "recipe/recipeform";
+    private final RecipeService recipeService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
-
     @GetMapping("/recipe/{id}/show")
-    public String ShowById(@PathVariable String id,Model model){
-    model.addAttribute("recipe",recipeService.findById(new Long(id)));
-    return "recipe/show";
+    public String showById(@PathVariable String id, Model model){
+
+        model.addAttribute("recipe", recipeService.findById(id));
+
+        return "recipe/show";
     }
 
-
-    @GetMapping("/recipe/new")
+    @GetMapping("recipe/new")
     public String newRecipe(Model model){
-    model.addAttribute("recipe",new RecipeCommand());
-    return "recipe/recipeform";
-    }
+        model.addAttribute("recipe", new RecipeCommand());
 
-    @GetMapping("/recipe/{id}/update")
-    public String updateRecipe(Model model,@PathVariable Long id){
-        model.addAttribute("recipe",recipeService.findCommandById(id));
         return "recipe/recipeform";
     }
 
-    @PostMapping("/recipe/new")
-    public String  saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipe, BindingResult bindingResult){
-
-   if(bindingResult.hasErrors()){
-
-       bindingResult.getAllErrors().forEach(objectError ->
-       {log.debug(objectError.toString());
-       });
-
-       return RECIPE_RECIPEFORM_URL;
-   }
-
-    RecipeCommand recipeCommand=recipeService.saveRecipeCommand(recipe);
-    return "redirect:/recipe/"+recipeCommand.getId()+ "/show";
+    @GetMapping("recipe/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model){
+        model.addAttribute("recipe", recipeService.findCommandById(id));
+        return RECIPE_RECIPEFORM_URL;
     }
 
-@GetMapping("/recipe/{id}/delete")
-public String deleteById(@PathVariable Long id){
-        log.debug("Deleting id:  "+ id);
+    @PostMapping("recipe")
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+
+            bindingResult.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+
+            return RECIPE_RECIPEFORM_URL;
+        }
+
+        RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
+
+        return "redirect:/recipe/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping("recipe/{id}/delete")
+    public String deleteById(@PathVariable String id){
+
+        log.debug("Deleting id: " + id);
+
         recipeService.deleteById(id);
-
         return "redirect:/";
-}
+    }
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-@ExceptionHandler(NotFoundException.class)
-public ModelAndView handleNotFound(Exception exception){
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception){
 
-log.error("Handling not found exception");
-log.error(exception.getMessage());
-    ModelAndView modelAndView=new ModelAndView("404error");
-    modelAndView.addObject("exception",exception);
+        log.error("Handling not found exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
 
         return modelAndView;
-}
-
-
-
-
-
+    }
 
 }
 

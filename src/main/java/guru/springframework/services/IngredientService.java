@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 
 
 public interface IngredientService {
-    IngredientCommand  findByRecipeIdAndIngredientId(Long recipeId,Long ingredientId);
 
-    IngredientCommand saveIngredientCommand(IngredientCommand ingredientCommand);
+    IngredientCommand findByRecipeIdAndIngredientId(String recipeId, String ingredientId);
 
-    void deleteById(Long recipeId, Long id);
+    IngredientCommand saveIngredientCommand(IngredientCommand command);
 
+    void deleteById(String recipeId, String idToDelete);
 }
+

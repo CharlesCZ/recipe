@@ -14,15 +14,17 @@ import java.io.IOException;
 @Service
 public class ImageServiceImpl implements ImageService {
 
-RecipeRepository recipeRepository;
 
-    public ImageServiceImpl(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    private final RecipeRepository recipeRepository;
+
+    public ImageServiceImpl( RecipeRepository recipeService) {
+
+        this.recipeRepository = recipeService;
     }
 
     @Override
     @Transactional
-    public void saveImageFile(Long recipeId, MultipartFile file) {
+    public void saveImageFile(String recipeId, MultipartFile file) {
 
         try {
             Recipe recipe = recipeRepository.findById(recipeId).get();
