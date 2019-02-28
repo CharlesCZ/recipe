@@ -46,7 +46,7 @@ public class RecipeController {
         return RECIPE_RECIPEFORM_URL;
     }
 
-    @PostMapping("recipe")
+    @PostMapping("recipe/new")
     public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
