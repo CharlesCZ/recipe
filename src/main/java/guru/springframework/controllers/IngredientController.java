@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @Controller
-public class IngredientController {
+public class  IngredientController {
 
     private final IngredientService ingredientService;
     private final RecipeService recipeService;
