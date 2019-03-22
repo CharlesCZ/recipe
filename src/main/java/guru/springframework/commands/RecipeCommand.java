@@ -11,31 +11,34 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by jt on 6/21/17.
  */
-@Getter
+
 @Setter
+@Getter
 @NoArgsConstructor
 public class RecipeCommand {
     private String id;
 
+    @NotBlank@Size(min = 3, max = 255)
     @NotBlank
     @Size(min=3, max = 255)
     private String description;
 
+    @Min(1)@Max(999)
     @Min(1)
     @Max(999)
     private Integer prepTime;
 
+    @Min(1)@Max(999)
     @Min(1)
     @Max(999)
     private Integer cookTime;
 
+    @Min(1)@Max(999)
     @Min(1)
     @Max(999)
     private Integer servings;
@@ -43,8 +46,10 @@ public class RecipeCommand {
     private String source;
 
     @URL
+    @URL
     private String url;
 
+    @NotBlank
     @NotBlank
     private String directions;
     private List<IngredientCommand> ingredients = new ArrayList<>();
@@ -52,4 +57,5 @@ public class RecipeCommand {
     private Difficulty difficulty;
     private NotesCommand notes;
     private List<CategoryCommand> categories = new ArrayList<>();
+
 }

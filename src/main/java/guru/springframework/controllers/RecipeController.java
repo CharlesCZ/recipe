@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,6 +22,12 @@ public class RecipeController {
     private static final String RECIPE_RECIPEFORM_URL = "recipe/recipeform";
     private final RecipeService recipeService;
 
+    private WebDataBinder webDataBinder;
+
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder){
+        this.webDataBinder=webDataBinder;
+    }
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
@@ -42,13 +49,14 @@ public class RecipeController {
 
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
-        model.addAttribute("recipe", recipeService.findCommandById(id));
+        model.addAttribute("recipe", recipeService.findCommandById(id).block());
         return RECIPE_RECIPEFORM_URL;
     }
 
     @PostMapping("recipe/new")
-    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult){
-
+    public String saveOrUpdate( @ModelAttribute("recipe") RecipeCommand command){
+webDataBinder.validate();
+BindingResult bindingResult=webDataBinder.getBindingResult();
         if(bindingResult.hasErrors()){
 
             bindingResult.getAllErrors().forEach(objectError -> {

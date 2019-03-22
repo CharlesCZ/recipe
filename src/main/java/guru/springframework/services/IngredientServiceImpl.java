@@ -50,7 +50,6 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    @Transactional
     public Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command) {
 
 
